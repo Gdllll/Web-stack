@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src=
+
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+
+    </script>
+  <title>LOGIN - WEBSTACK</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      
+    }
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      
+    }
+    .main img{
+      height:50px;
+      width:50px;
+    }
+    .main input{
+      height:35px;
+      width:300px;
+      border-radius:10px;
+      border-style:none;
+      
+    }
+    button{
+      height:35px;
+      width:300px;
+      background:#1E6CE4;
+      border-style:none;
+      border-radius:10px;
+      color:white;
+      font-weight:bold;
+    }
+    h3{
+      font-weight:bold;
+      
+    }
+  </style>
+</head>
+
+<body>
+<div class="main">
+  <img src="https://i.ibb.co/4tQGZzM/simple-flat-colorful-infinity-symbol-flat-icon-mad.webp" alt="simple-flat-colorful-infinity-symbol-flat-icon-mad" border="0" ""><h3>Webstack</h3>
+  <br>
+  <input type="text" placeholder="  enter your email" id="email"
+  ><br>
+  <br>
+  <input type="text" placeholder=" First name"
+  id="name"
+  ><br>
+  <br>
+  <input type="text" placeholder=" Last name"
+  id="lname"
+  ><br>
+  <br>
+  <input type="password" placeholder="  create your password"
+  id="password"
+  ><br>
+  <br>
+  <button type="button" class="btn btn-primary">start</button>
+</div>
+</body>
+<script src=
+
+"https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+
+    </script>
+
+     
+
+    <script>
+
+        let firebaseConfig = {
+
+            apiKey: "AIzaSyAtZqPfOpvjvXq0sH5n3g4O7zPJFrE_LuU",
+
+            authDomain: "dcpt-57775.firebaseapp.com",
+
+            databaseURL: "https://dcpt-57775-default-rtdb.firebaseio.com",
+
+            projectId: "dcpt-57775",
+
+            storageBucket: "dcpt-57775.appspot.com",
+
+            messagingSenderId: "271525210052",
+
+            appId: "1:271525210052:web:eea7d04994b2942eafa691"
+
+        };
+ 
+
+        firebase.initializeApp(firebaseConfig);
+ 
+
+        let messagesRef = firebase.database()
+
+            .ref('Collected Data');
+
+         
+
+        document.getElementById('contactForm')
+
+            .addEventListener('submit', submitForm);
+ 
+
+        function submitForm(e) {
+
+            e.preventDefault();
+ 
+
+            // Get values
+
+            let name = getInputVal('name');
+
+            let email = getInputVal('email');
+            
+            let lname = getInputVal('lname');
+            
+            let password = getInputVal('password');
+ 
+
+            saveMessage(name, email, lname, password);
+
+            document.getElementById('contactForm').reset();
+
+        }
+ 
+
+        // Function to get form values
+
+        function getInputVal(id) {
+
+            return document.getElementById(id).value;
+
+        }
+ 
+
+        // Save message to firebase
+
+        function saveMessage(name, email, lname, password) {
+
+            let newMessageRef = messagesRef.push();
+
+            newMessageRef.set({
+
+                name: name,
+
+                email: email,
+                
+                lname: lname,
+                
+                password: password,
+
+            });
+
+        }
+
+    </script>
+</html>
